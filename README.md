@@ -119,6 +119,7 @@ package:
   include_dependencies: false
   register:             true
   registry_token:       ${{ secrets.JAVA_REGISTRY_TOKEN }}
+  platform:             { os: "windows" }
 ```
 
 * [Example `create-package.yml`](https://github.com/paketo-buildpacks/adopt-openjdk/blob/main/.github/workflows/create-package.yml)

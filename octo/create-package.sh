@@ -16,3 +16,7 @@ fi
 
 [[ -e package.toml ]] && cp package.toml "${HOME}"/package.toml
 printf '[buildpack]\nuri = "%s"' "${HOME}"/buildpack >> "${HOME}"/package.toml
+
+if [ -n "${PLATFORM_OS}" ]; then
+  printf '[platform]\nos = "%s"' "${PLATFORM_OS}" >> "${HOME}"/package.toml
+fi

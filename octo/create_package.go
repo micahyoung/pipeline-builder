@@ -93,6 +93,7 @@ func ContributeCreatePackage(descriptor Descriptor) (*Contribution, error) {
 						Env: map[string]string{
 							"INCLUDE_DEPENDENCIES": strconv.FormatBool(descriptor.Package.IncludeDependencies),
 							"VERSION":              "${{ steps.version.outputs.version }}",
+							"PLATFORM_OS":          descriptor.Package.Platform.OS,
 						},
 					},
 					{

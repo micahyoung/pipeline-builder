@@ -89,6 +89,11 @@ type Package struct {
 	IncludeDependencies bool `yaml:"include_dependencies"`
 	Register            bool
 	RegistryToken       string `yaml:"registry_token"`
+	Platform            *Platform
+}
+
+type Platform struct {
+	OS string
 }
 
 type Test struct {
