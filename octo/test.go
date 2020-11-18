@@ -120,6 +120,11 @@ func ContributeTest(descriptor Descriptor) (*Contribution, error) {
 					Env:  map[string]string{"PACK_VERSION": PackVersion},
 				},
 				{
+					Name: "Enable pack Experimental",
+					If:   fmt.Sprintf("${{ %t }}", descriptor.Package.Platform.OS == PlatformWindows),
+					Run:  StatikString("/enable-pack-experimental.sh"),
+				},
+				{
 					Uses: "actions/setup-go@v2",
 					With: map[string]interface{}{"go-version": GoVersion},
 				},
@@ -147,6 +152,7 @@ func ContributeTest(descriptor Descriptor) (*Contribution, error) {
 					Run:  StatikString("/create-package.sh"),
 					Env: map[string]string{
 						"INCLUDE_DEPENDENCIES": "true",
+						"OS":                   descriptor.Package.Platform.OS,
 						"VERSION":              "${{ steps.version.outputs.version }}",
 					},
 				},
