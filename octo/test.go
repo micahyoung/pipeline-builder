@@ -106,6 +106,11 @@ func ContributeTest(descriptor Descriptor) (*Contribution, error) {
 	}
 
 	if descriptor.Package != nil {
+		testImageFormat := "image"
+		if descriptor.Package.Platform.OS == PlatformWindows {
+			testImageFormat = "file"
+		}
+
 		j := actions.Job{
 			Name:   "Create Package Test",
 			RunsOn: []actions.VirtualEnvironment{actions.UbuntuLatest},
@@ -161,6 +166,7 @@ func ContributeTest(descriptor Descriptor) (*Contribution, error) {
 					Run:  StatikString("/package-buildpack.sh"),
 					Env: map[string]string{
 						"PACKAGE": "test",
+						"FORMAT": testImageFormat,
 						"VERSION": "${{ steps.version.outputs.version }}",
 					},
 				},
